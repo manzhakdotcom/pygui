@@ -19,6 +19,7 @@ class MainWindow(QMainWindow):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.setWindowTitle(u"Смена")
+        self.setWindowIcon(QIcon("icon.png"))
 
         pageLayout = QVBoxLayout()
         buttonLayout = QHBoxLayout()
