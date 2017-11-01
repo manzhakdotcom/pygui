@@ -73,7 +73,8 @@ class Smena:
         edit.add_command(label=u'Сотрудники ОДЦ ЖАТС', command=self.message)
         edit.add_command(label=u'Сотрудники ЦУП', command=self.message)
         edit.add_separator()
-        edit.add_command(label=u'Диспетчерские круги', command=self.message)
+        edit.add_command(label=u'Диспетчерские круги ЦУП', command=self.message)
+        edit.add_command(label=u'Дистанции БелЖД', command=self.message)
 
         help_.add_command(label=u'О программе', command=self.full)
 
@@ -93,11 +94,51 @@ class Smena:
 
 class ALSN():
     def __init__(self, root):
-        self.root = root
-        window = Toplevel(self.root)
+        window = Toplevel(root)
+        
         window.title(u'Добавить неисправность АЛСН')
-        window.geometry('300x200+800+400')
-        window.iconbitmap(os.getcwd() + os.path.sep +'smena.ico')
+        window.geometry('600x400+600+300')
+        window.iconbitmap(os.getcwd() + os.path.sep + 'img' + os.path        .sep +'smena.ico')        
+        
+        frameTop = Frame(window, bd=1, relief='sunken')
+        frameBottom = Frame(window, bd=1, relief='sunken')
+        
+        frameTop.grid(row=0, column=0, sticky='nsew', padx=2, pady=2)
+        frameBottom.grid(row=1, column=0, sticky='nsew', padx=2, pady=2)
+    
+        window.grid_rowconfigure(0, weight=10)
+        window.grid_rowconfigure(1, weight=1) 
+        window.grid_columnconfigure(0, weight=1)
+        
+        
+        ttk.Button(frameBottom, text=u'Закрыть', command=lambda: window.destroy()).pack(side='right', padx = 10)
+        ttk.Button(frameBottom, text=u'Применить', command=lambda: window.destroy()).pack(side='right')
+        
+        
+        window.focus_set()
+        window.grab_set()
+        window.wait_window()
+        
+        
+        
+    
+    def frames(self):
+        self.frameForm = Frame(Toplevel(), bg='#000000', bd=1, relief='sunken')
+        self.frameButtons = Frame(Toplevel(), bd=1, relief='sunken')
+
+        self.frameForm.grid(row=0, column=0, sticky='nsew', padx=2, pady=2)
+        self.frameButtons.grid(row=1, column=0, sticky='nsew', padx=2, pady=2)
+
+        self.root.grid_rowconfigure(0, weight=12)
+        self.root.grid_rowconfigure(1, weight=1)
+        
+        self.root.grid_columnconfigure(0, weight=1)     
+    
+    def form(self):
+        pass
+    
+    def buttons(self, window):
+        ttk.Button(window, text=u'Закрыть').grid()
     
     
 class Form:
@@ -108,7 +149,7 @@ def main():
     root = Tk()
     root.geometry('900x800+500+200')
     root.title(u'Журнал замечаний СЦБ')
-    root.iconbitmap(os.getcwd() + os.path.sep +'smena.ico')
+    root.iconbitmap(os.getcwd() + os.path.sep + 'img' + os.path.sep +'smena.ico')
     app = Smena(root)
     root.mainloop()
 
